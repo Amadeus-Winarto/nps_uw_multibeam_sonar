@@ -33,7 +33,8 @@ add_definitions(${PCL_DEFINITIONS})
 
 find_package(CUDA REQUIRED)
 include_directories(${CUDA_INCLUDE_DIRS})
-set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -arch=sm_60")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -arch=sm_80")
+message(${OpenCV_LIBRARIES})
 
 include_directories(${roscpp_INCLUDE_DIRS})
 include_directories(${std_msgs_INCLUDE_DIRS})
@@ -67,7 +68,8 @@ set_target_properties(nps_multibeam_sonar_ros_plugin
 target_link_libraries(nps_multibeam_sonar_ros_plugin
                       ${OGRE_LIBRARIES} ${catkin_LIBRARIES}
                       ${CUDA_LIBRARIES}
-                      ${CUDA_CUFFT_LIBRARIES})
+                      ${CUDA_CUFFT_LIBRARIES}
+                      ${OpenCV_LIBRARIES})
 add_dependencies(nps_multibeam_sonar_ros_plugin ${catkin_EXPORTED_TARGETS})
 list(APPEND SENSOR_ROS_PLUGINS_LIST nps_multibeam_sonar_ros_plugin)
 
@@ -83,7 +85,7 @@ set_target_properties(nps_multibeam_sonar_ray_ros_plugin
 target_link_libraries(nps_multibeam_sonar_ray_ros_plugin
                       ${OGRE_LIBRARIES} ${catkin_LIBRARIES}
                       ${CUDA_LIBRARIES} ${PCL_LIBRARIES}
-                      ${CUDA_CUFFT_LIBRARIES})
+                      ${CUDA_CUFFT_LIBRARIES} ${OpenCV_LIBRARIES})
 add_dependencies(nps_multibeam_sonar_ray_ros_plugin ${catkin_EXPORTED_TARGETS})
 list(APPEND SENSOR_ROS_PLUGINS_LIST nps_multibeam_sonar_ray_ros_plugin)
 
